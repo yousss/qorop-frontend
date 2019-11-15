@@ -1,0 +1,103 @@
+$custom-grid-columns := 12
+$custom-grid-breakpoints := {
+  xsmall: 320px
+  small: 480px
+  medium: 800px
+  large: 1080px
+  xlarge: 1300px
+}
+for size, width in $custom-grid-breakpoints
+  @media screen and (min-width: width)
+    for n in (1..$custom-grid-columns)
+      .{size}-{n}
+        flex-basis: (100 / n)%
+        flex-grow: 0
+        max-width: (100 / n)%
+      for m in (1..n)
+        .{size}-{m}-{n}
+          flex-basis: (100 / n * m)%
+          flex-grow: 0
+          max-width: (100 / n * m)%
+
+.container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+.container-sm {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.container.grid-list-lg {
+  .layout { 
+    .flex {
+      padding: 15px;
+    }
+    &:only-child{
+      margin: 0 -15px;
+    }
+  }
+}
+
+.container.grid-list-md {
+  .layout {
+    .flex {
+      padding: 10px;
+    }
+
+    &:only-child {
+      margin: 0 -10px;
+    }
+  }
+}
+
+
+@media screen and (min-width: 320px) {
+  .container, .container-sm  {
+    padding: 0 10px;
+  }
+  .grid-list-cs{
+    .layout{
+      margin: 0 -10px
+      .flex{
+        padding: 6px
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 641px) {
+  .grid-list-cs{
+    .layout{
+      margin: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 1079px){
+  .hidden-medium-and-down{
+    display: none !important;
+  }
+}
+@media screen and (min-width: 960px) {
+  .grid-list-cs{
+    .layout{
+      .flex{
+        padding: 10px;
+      }
+    }
+  }
+}
+
+
+@media screen and (min-width: 1610px) {
+  .container, .container-sm {
+    padding: 0
+  }
+  .grid-list-cs{
+    .layout{
+      margin: 0 -10px
+    }
+  }
+}

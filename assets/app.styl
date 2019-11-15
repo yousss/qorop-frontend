@@ -1,0 +1,80 @@
+// Import Vuetify styling
+@require './variables'
+@import './grid'
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  font-size: 17px;
+  width: 100%;
+  overflow-x hidden;
+  font-family: $body-font-family;
+}
+a{
+  text-decoration: none;
+  display: block;
+}
+ul{
+  list-style-type: none;
+}
+p {
+  margin: 0
+  line-height: 1.75;
+}
+i {
+  outline: none;
+}
+i.theme--light.v-icon {
+  color: inherit
+}
+.v-toolbar--fixed{
+  z-index: 5
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  border-radius: 25px;
+  -webkit-box-shadow: 0 0 0 30px rgba(0,0,0,0) inset !important;
+  animation: autofill 0s forwards;
+}
+.input-group{
+  font-size: 1rem
+  
+  label{
+    color: rgba(white, 0.3) !important
+  }
+}
+.input-group__details{
+  min-height: 1px;  
+}
+.input-group__details:before{
+  background-color: rgba(white, 0.3) !important
+}
+.input-group--text-field input, .input-group--text-field textarea{
+  font-size: 1.15rem;
+}
+.v-text-field__details {
+  display: none;
+}
+.v-input__slot {
+  margin-bottom: 0;
+}
+.theme--light.v-label {
+  color: $color-purple
+}
+.theme--light.v-text-field > .v-input__control > .v-input__slot:before{
+  color: $color-purple
+}
+.v-text-field > .v-input__control > .v-input__slot:after {
+  color: $color-purple-dark
+}
+.form-group{
+  margin-bottom: 10px;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to{
+  opacity: 0;
+}

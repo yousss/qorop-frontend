@@ -1,0 +1,16 @@
+{
+  "webUrl":         "https://www.jeetwin.com",
+  "ApiHost":        "https://www.jeetwin.com/service",
+  "labsApi":        "https://labsap.jeetwin.net",
+  "fpApi":          "https://fp.jeetwin.net",
+  "cmsApi":         "https://cmsap.jeetwin.net",
+  "tournamentApi":  "https://tournament.jeetwin.net",
+  "otpApi":         "https://validate.jeetwin.net",
+  "lpApi":          "https://lp.jeetwin.net",
+  "baApi":          "https://ba.jeetwin.net",
+  "qrcode":         "qrcode",
+  "port":           "1333",
+  "qrlink":         "https://download.ocms365.com/app/jw/app.html",
+  "logrocket":      "mirrorgames/jwweb-du2lz",
+  "pgApi":          "https://pg.jeetwin.net"
+}

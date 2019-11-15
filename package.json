@@ -1,0 +1,35 @@
+{
+  "name": "elaine",
+  "version": "1.0.0",
+  "description": "elaine project",
+  "author": "Yous Yoeun",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.8.0",
+    "axios": "^0.19.0",
+    "babel-eslint": "^10.0.3",
+    "cookie-universal-nuxt": "^2.0.18",
+    "core-util-is": "^1.0.2",
+    "cross-env": "^5.2.0",
+    "fastify": "^1.13.3",
+    "nuxt": "^2.0.0",
+    "nuxt-i18n": "^5.2.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
+    "vue-core-image-upload": "^2.4.11",
+    "vue-fb-customer-chat": "^0.1.5"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9",
+    "@nuxtjs/vuetify": "^1.0.0",
+    "eslint": "^4.15.0",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-vue": "^4.0.0"
+  }
+}

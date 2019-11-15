@@ -1,0 +1,16 @@
+{
+  "webUrl":         "https://jwv2.gpms365.net/",
+  "ApiHost":        "https://jwv2.gpms365.net/service",
+  "labsApi":        "https://labsap.jeetbet777.net",
+  "fpApi":          "https://fp.jeetbet777.net",
+  "cmsApi":         "https://cmsap.jeetbet777.net",
+  "tournamentApi":  "https://tournament.jeetbet777.net",
+  "otpApi":         "https://validate.jeetbet777.net",
+  "lpApi":          "https://lp.jeetbet777.net",
+  "baApi":          "https://ba.jeetbet777.net",
+  "qrcode":         "qrcodeStage",
+  "port":           "1333",
+  "qrlink":         "https://download.ocms365.com/app/demo/jwv2/app.html",
+  "logrocket":      "mirrorgames/jwwebtest-fofsz",
+  "pgApi":          "https://pg.jeetbet777.net"
+}
