@@ -10,15 +10,16 @@
       md6
     >
       <div class="text-center">
+        <productList />
       </div>
-       <VueCoreImageUpload
+       <!-- <VueCoreImageUpload
         :class="['btn', 'btn-primary']"
         :crop="false"
         @imageuploaded="imageuploaded"
         :data="data"
         :max-file-size="5242880"
         url="your server url" >
-      </VueCoreImageUpload>
+      </VueCoreImageUpload> -->
    
     </v-flex>
   </v-layout>
@@ -26,6 +27,7 @@
 
 <script>
 import axios from 'axios'
+import productList from '~/components/product/productList.vue'
 import Logo from '~/components/Logo.vue'
 import VueCoreImageUpload from 'vue-core-image-upload';
 
@@ -46,7 +48,8 @@ export default {
   },
   components: {
     Logo,
-    VueCoreImageUpload
+    VueCoreImageUpload,
+    productList
   }
 }
 </script>

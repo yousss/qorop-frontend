@@ -1,5 +1,5 @@
 const path = require('path')
-const locale = 'kh-KH'
+const locale = 'km-KH'
 
 const component = require(path.resolve(`lang/${locale}/components/index.js`))
 const api = require(path.resolve(`lang/${locale}/api/index.js`))

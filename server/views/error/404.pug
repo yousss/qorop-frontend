@@ -1,0 +1,108 @@
+doctype html
+html
+  head
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(http-equiv='Content-Style-Type', content='text/css')
+    title 404 error
+    link(href='style.css', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons', rel='stylesheet')
+    link(href='https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.2.89/css/materialdesignicons.css', rel='stylesheet')
+    style.
+      *{padding:0; margin: 0}
+      a{text-decoration: none; color: white}
+      html{
+        background-color: #111111;
+        -webkit-font-smoothing: antialiased;
+        font-size: 15px;
+        width: 100%;
+        overflow-x: hidden;
+      }
+      body{
+        font-family: 'Roboto', sans-serif ;  
+      }
+      .error-page-container{
+        width: 100vw;
+        height: 100vh;
+        z-index: 2000;
+        background: hsla(0,0%,10%,1);
+        background: -moz-linear-gradient(top, hsla(0,0%,10%,1) 0%, hsla(0,0%,0%,1) 100%);
+        background: -webkit-gradient(left top, left bottom, color-stop(0%, hsla(0,0%,10%,1)), color-stop(100%, hsla(0,0%,0%,1)));
+        background: -webkit-linear-gradient(top, hsla(0,0%,10%,1) 0%, hsla(0,0%,0%,1) 100%);
+        background: -o-linear-gradient(top, hsla(0,0%,10%,1) 0%, hsla(0,0%,0%,1) 100%);
+        background: -ms-linear-gradient(top, hsla(0,0%,10%,1) 0%, hsla(0,0%,0%,1) 100%);
+        background: linear-gradient(to bottom, hsla(0,0%,10%,1) 0%, hsla(0,0%,0%,1) 100%);
+        position: fixed;
+        top: 0;
+        left: 0;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        padding: 100px;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+      .err-slot{
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+      img{
+        width: 100%;
+      }
+      h1{
+        color: #f9bb22;
+        font-weight: 400;
+      }
+      p{
+        margin-top: 10px;
+        font-size: 1.75rem;
+        font-weight: 300;
+        color: white
+      }
+      .jwbtn{
+        border-radius: 10px;
+        border: none;
+        margin: 6px 8px;
+        color: white;
+        cursor: pointer;
+        transition: all .3s ease;
+        -webkit-transition: all .3s ease;
+        -moz-transition: all .3s ease;
+        -ms-transition: all .3s ease;
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+        text-transform: uppercase;
+        outline: none;
+        width: 220px;
+        padding: 20px;
+        font-size: 1.2rem;
+        font-weight: 400;
+      }
+      i.mdi{
+        margin-right: 5px;
+      }
+      .jwbtn-primary-transparent{
+        background-color: transparent !important;
+          -webkit-box-shadow: 0 0 0 1px #f9bb22 inset;
+                  box-shadow: 0 0 0 1px #f9bb22 inset;    
+      }
+      .jwbtn-primary-transparent:hover:enabled{
+        background-color:#f9bb22 !important
+      }
+  body
+    .error-page-container
+      .err-slot
+        img(src='/404error.png', alt='404')
+      div
+        h1 Opps, Sorry We can't find that page...
+        p Either something went wrong or the page doesn't exist anymore.
+      a(href='/')
+        button.jwbtn.jwbtn-primary-transparent.home
+          i.mdi.mdi-arrow-left
+          | Back to Home
+
+    

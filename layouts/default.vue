@@ -31,6 +31,7 @@
       flat
       max-height="500"
       color="#fff"
+      elevation-on-scroll
     >
       <v-app-bar-nav-icon color="black" @click.stop="drawer = !drawer" />
       <v-btn
@@ -42,6 +43,19 @@
       <div class="image-wrapper">
         <img src="~/assets/img/logo.png" />
       </div>
+      <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
+      <v-tabs
+          align-with-title
+          background-color="transparent"
+          optional
+        >
+          <v-tab>My Cart</v-tab>
+          <v-tab>My Favorite</v-tab>
+          <v-tab>Register</v-tab>
+          <v-tab>Login</v-tab>
+      </v-tabs>
+      <language />
     </v-app-bar>
     <v-content>
       <carousel />
@@ -61,6 +75,8 @@
 
 <script>
 import carousel from '~/components/carousel/index.vue'
+import VuetifyLogo from '~/components/VuetifyLogo.vue'
+import language from '~/components/language/lang.vue'
 
 export default {
   data () {
@@ -91,6 +107,8 @@ export default {
   },
   components: {
     carousel,
+    VuetifyLogo,
+    language
   },
 }
 </script>
@@ -99,6 +117,13 @@ export default {
 
 .v-application {
   font-family: $body-font-family;
+}
+
+.v-tabs {
+  .v-slide-group__content {
+    display: flex;
+    justify-content: flex-end;
+  }
 }
 
 .v-toolbar__content .image-wrapper {

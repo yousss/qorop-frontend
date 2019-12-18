@@ -1,0 +1,113 @@
+doctype html
+html
+  head
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(http-equiv='Content-Style-Type', content='text/css')
+    title Transaction status
+    link(href='style.css', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Teko:400,700', rel='stylesheet')
+    style.
+      body{
+      background: hsla(270, 15%, 11%, 1);
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      overflow-x: hidden
+      }
+      .transaction-status p {
+      font-size: 1.5625rem;
+      white-space: nowrap;
+      margin-top: 36px;
+      color: white;
+      }
+      .transaction-container {
+      width: 90%;
+      margin: 0 auto;
+      padding: 100px 10px;
+      }
+      .transaction-status{
+      margin: 0 auto;
+      display: block;
+      text-align: center;
+      }
+      .transaction-status img {
+      margin: 0 auto;
+      width: 100px;
+      height: 100px;
+      display: block;
+      }
+      .transaction-status p {
+      font-size: 1.5625rem;
+      white-space: nowrap;
+      margin-top: 36px;
+      color: white;
+      }
+      .user-info {
+      margin: 0 auto;
+      background: hsla(267, 14%, 15%, 1);;
+      border-radius: 10px;
+      margin-top: 54px;
+      padding: 50px 10px;
+      width: 90%;
+      max-width: 500px;
+      }
+      .user-info-field {
+      margin-top: 20px;
+      }
+      .user-info-field p {
+      font-size: 0.9375rem;
+      text-align: center;
+      color: hsla(300, 93%, 55%, 1);
+      margin-bottom: 0px;
+      }
+      .user-info h3 {
+      font-family: 'Teko', sans-serif !important;
+      font-size: 2.5rem;
+      text-align: center;
+      color: white;
+      font-weight: 300;
+      }
+      .color-primary {
+      color: hsla(300, 93%, 55%, 1);
+      display: inline-block;
+      }
+      .contact-us {
+      color: #8f99a3;
+      text-align: center;
+      margin-top: 50px;
+      }
+      .contact-us a{
+        text-decoration: none;
+        color: hsla(300, 93%, 55%, 1)
+      }
+      .contact-us a:hover{
+        text-decoration: underline
+      }
+  body
+    .transaction-container
+      .transaction-status
+        img(src='/icon-check.svg', alt='Transaction')
+        p Transaction Successful
+      -if(Object.keys(data).length > 0)
+        .user-info
+          .user-info-field
+            p Transaction ID
+            h3=data.transaction_id
+      p.contact-us
+        | If you have any questions, please contact out 
+        a.link(href="#", onClick='LC_API.open_chat_window();')
+          span.color-primary Customer Service
+      p.contact-us
+        | Go back to 
+        a(href="/") Siam99
+    
+  script.
+      var chatButton;
+      window.__lc = window.__lc || {};
+      window.__lc.license = 10817422;
+      (function() {
+        var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
+        lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
+        chatButton = document.getElementsByTagName('script')[0]; chatButton.parentNode.insertBefore(lc, chatButton);
+      })();

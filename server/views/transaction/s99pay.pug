@@ -1,0 +1,140 @@
+doctype html
+html
+  head
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(http-equiv='Content-Style-Type', content='text/css')
+    title Transaction status
+    link(href='style.css', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Teko:400,700', rel='stylesheet')
+    style.
+      body{
+      background: #111;
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      overflow-x: hidden
+      }
+      .transaction-status p {
+      font-size: 1.5625rem;
+      white-space: nowrap;
+      margin-top: 36px;
+      color: #fff;
+      }
+      .transaction-container {
+      width: 90%;
+      margin: 0 auto;
+      padding: 100px 10px;
+      }
+      .transaction-status{
+      margin: 0 auto;
+      display: block;
+      text-align: center;
+      }
+      .transaction-status img {
+      margin: 0 auto;
+      width: 100px;
+      height: 100px;
+      display: block;
+      }
+      .transaction-status p {
+      font-size: 1.5625rem;
+      white-space: nowrap;
+      margin-top: 36px;
+      color: #fff;
+      }
+      .user-info {
+      margin: 0 auto;
+      background: #1a1a1a;
+      border-radius: 10px;
+      margin-top: 54px;
+      padding: 50px 10px;
+      width: 90%;
+      max-width: 500px;
+      }
+      .user-info-field {
+      margin-top: 20px;
+      }
+      .user-info-field p {
+      font-size: 0.9375rem;
+      text-align: center;
+      color: #f9bb22;;
+      margin-bottom: 0px;
+      }
+      .user-info h3 {
+      font-family: 'Teko', sans-serif !important;
+      font-size: 2.5rem;
+      margin: 15px 0;
+      text-align: center;
+      color: #fff;
+      font-weight: 300;
+      }
+      .color-primary {
+      color: #f9bb22;;
+      display: inline-block;
+      }
+      .contact-us {
+      color: #8f99a3;
+      text-align: center;
+      margin-top: 50px;
+      }
+      .contact-us a{
+        text-decoration: none;
+        color: #f9bb22
+      }
+      .contact-us a:hover{
+        text-decoration: underline
+      }
+      .err-msg{
+        text-align: center;
+        color: #DA4A4C;
+        font-style: italic;
+      }
+      @media only screen and (max-width: 640px) {
+        .user-info h3{
+          font-size: 1.5rem;
+        }
+      }
+  body
+    .transaction-container
+      .transaction-status
+        -if(data.status==='SUCCESS')
+          img(src='/icon-check.svg', alt='Transaction')
+          p Transaction Successful
+        -else
+          img(src='/icon-cross.svg', alt='Transaction')
+          p Transaction Failed
+      .user-info
+        .user-info-field
+          p Transaction ID
+          h3=data.cartId
+        .user-info-field
+          p Currency
+          h3=data.currency
+        .user-info-field
+          p Order Amount
+          h3=data.orderAmount
+        -if(data.status==='FAILED')
+          -if(data.statusMessage === 'null') 
+            p.err-msg="We are experiencing some technical difficulties. Please contact Customer Service and provide the Transaction ID."
+          -else if(data.statusMessage==='400')
+            p.err-msg="Your beneficiary process has been set to process which might take from 3 to 24 hours. Please try again after the cooling period."
+          -else
+            p.err-msg=data.statusMessage
+      p.contact-us
+        | If you have any questions, please contact out 
+        a.link(href="#", onClick='LC_API.open_chat_window();')
+          span.color-primary Customer Service
+      p.contact-us
+        | Go back to 
+        a(href="/") Siam99
+    
+  script.
+      var chatButton;
+      window.__lc = window.__lc || {};
+      window.__lc.license = 10817422;
+      (function() {
+        var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
+        lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
+        chatButton = document.getElementsByTagName('script')[0]; chatButton.parentNode.insertBefore(lc, chatButton);
+      })();

@@ -3,7 +3,7 @@ export default ({ app, route, redirect }) => {
     let locale = app.i18n.locale
 
     const localeCookie = app.$cookie.get('lang')
-    locale = localeCookie || 'th';
+    locale = localeCookie || 'en';
 
     if(locale && locale !== app.i18n.locale){
       redirect('/'+locale, route.query)

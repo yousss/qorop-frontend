@@ -21,7 +21,8 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.0.96/css/materialdesignicons.css' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700|Material+Icons' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Quicksand&display=swap' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Quicksand&display=swap' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Dancing+Script' }
     ]
   },
   /*
@@ -56,7 +57,17 @@ module.exports = {
     ["nuxt-i18n", I18N],
     '@nuxtjs/axios',
     ['cookie-universal-nuxt', { alias: 'cookie', parseJSON: false }],
+    ['nuxt-mq', {
+      breakpoints: {
+        sm: 450,
+        xmd: 640,
+        tab: 1025,
+        md: 1250,
+        lg: Infinity
+      }
+    }]
   ],
+  env: envConfig,
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module
