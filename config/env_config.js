@@ -15,5 +15,6 @@ module.exports = {
   IMG_CDN: 'https://jwcm.imgix.net',
   BAAPI: config.baApi,
   logrocket: config.logrocket,
-  PGAPI: config.pgApi
+  PGAPI: config.pgApi,
+  POST: config.post
 }

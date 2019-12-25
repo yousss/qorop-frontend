@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0
+    }
+
+    .loader-overlay {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      overflow: hidden;
+      z-index: 99999;
+      background-color: hsla(270, 15%, 11%, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    img {
+      transform: rotate(-15deg)
+    }
+  </style>
+</head>
+
+<body>
+  <div class="loader-overlay">
+    <img src="/_nuxt/assets/img/loader.gif" alt="Siam99 Loader">
+  </div>
+</body>
+
+</html>

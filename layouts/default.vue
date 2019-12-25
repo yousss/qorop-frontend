@@ -50,10 +50,10 @@
           background-color="transparent"
           optional
         >
-          <v-tab>My Cart</v-tab>
-          <v-tab>My Favorite</v-tab>
-          <v-tab>Register</v-tab>
-          <v-tab>Login</v-tab>
+          <v-tab>{{ $t('links.myCart')  }}</v-tab>
+          <v-tab>{{ $t('links.myFavorite')  }}</v-tab>
+          <v-tab>{{ $t('links.register')  }}</v-tab>
+          <v-tab>{{ $t('links.login')  }}</v-tab>
       </v-tabs>
       <language />
     </v-app-bar>
@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import carousel from '~/components/carousel/index.vue'
 import VuetifyLogo from '~/components/VuetifyLogo.vue'
 import language from '~/components/language/lang.vue'
@@ -81,6 +82,7 @@ import language from '~/components/language/lang.vue'
 export default {
   data () {
     return {
+      users: [],
       clipped: false,
       drawer: false,
       fixed: false,
@@ -104,11 +106,28 @@ export default {
   },
   mounted () {
     this.$fbCustomerChat
+    console.log(this.isAuthenticated)
+    this.getUsers()
   },
   components: {
     carousel,
     VuetifyLogo,
     language
+  },
+  computed: {
+    ...mapGetters(['isAuthenticated'])
+  },
+  methods: {
+    ...mapActions(['checkAxiosTest', 'checkLogin']),
+    getUsers () {
+      this.checkAxiosTest().then(res => {
+        this.users = res;
+      }).catch(err => {
+        console.log(err)
+      })
+
+      this.checkLogin()
+    }
   },
 }
 </script>

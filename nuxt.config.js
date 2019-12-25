@@ -2,7 +2,7 @@ const colors = require('vuetify/es5/util/colors').default
 const path = require("path");
 const config = require(path.resolve("config"));
 const envConfig = require(path.resolve("config", "env_config.js"));
-const I18N = require(path.resolve("config", "i18n", "index.js"));
+// const I18N = require(path.resolve("config", "i18n", "index.js"));
 
 module.exports = {
   mode: 'spa',
@@ -28,7 +28,12 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: {
+    name: 'fading-circle',
+    color: '#3B8070',
+    background: 'white'
+  },
+  loadingIndicator: "~/spaLoader/fading-circle.html",
   /*
   ** Global CSS
   */
@@ -39,23 +44,27 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~plugins/vue-fb-customer-chat.js', ssr: false },
+    // { src: '~plugins/vue-fb-customer-chat.js', ssr: false },
     { src: '~plugins/vue-core-image-upload.js', ssr: false },
-    { src: '~plugins/set-locale-onload', mode: 'client' },
-    { src: '~plugins/jw-core-components', mode: 'client' }
+    { src: '~plugins/i18n', mode: 'client' },
+    { src: '~plugins/jw-core-components', ssr: false },
+    { src: '~plugins/vendor/axios', ssr: true },
+    { src: '~plugins/vendor/client-vendor', ssr: true },
+    { src: '~plugins/jwRedirect', ssr: true },
+    { src: '~plugins/gtmEvent', ssr: true }
   ],
   /*
   ** Nuxt.js dev-modules
   */
   buildModules: [
     '@nuxtjs/vuetify',
+    '@nuxtjs/axios',
+    // '@nuxtjs/auth',
   ],
   /*
   ** Nuxt.js modules
   */
   modules: [
-    ["nuxt-i18n", I18N],
-    '@nuxtjs/axios',
     ['cookie-universal-nuxt', { alias: 'cookie', parseJSON: false }],
     ['nuxt-mq', {
       breakpoints: {
@@ -67,7 +76,23 @@ module.exports = {
       }
     }]
   ],
+  // auth: {
+  //   strategies: {
+  //     local: {
+  //       endpoints: {
+  //         login: { url: '/api/auth/login', method: 'post', propertyName: 'token' },
+  //         logout: { url: '/api/auth/logout', method: 'post' },
+  //         user: { url: '/api/auth/user', method: 'get', propertyName: 'user' }
+  //       },
+  //       // tokenRequired: true,
+  //       // tokenType: 'bearer'
+  //     }
+  //   }
+  // },
   env: envConfig,
+  router: {
+    middleware: ["checklogin", "i18n"]
+  },
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module

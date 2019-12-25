@@ -9,14 +9,15 @@
           icon
         >
          <v-avatar height="32px">
-          <img :src="loadImage($i18n.locale === undefined ? 'English' : 'Khmer')" alt="image loading language" />
+          <img :src="loadImage($i18n.locale === 'en' ? 'English' : 'Khmer')" alt="image loading language" />
          </v-avatar>
         </v-btn>
       </template>
       <v-list>
-         <v-list-item-group v-model="langSelected">
+         <v-list-item-group >
             <v-list-item
-              v-for="locale in availableLocales" :key="locale.code"
+              v-for="locale in locales" :key="locale.code"
+              @click="onChangeLang(locale.code)"
             >
               <v-list-item-icon>
                 <v-avatar height="32px">
@@ -25,7 +26,7 @@
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title v-text="locale.name">
-                  <nuxt-link :to="switchLocalePath(locale.code)"></nuxt-link>
+                  <!-- <nuxt-link to="" ></nuxt-link> -->
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -35,17 +36,18 @@
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
+
 export default {
-  data: () => {
-    return { langSelected: 'en' }
+  data () {
+    return {
+      locales: [
+        { code: 'en', name: this.$t('links.langEn') },
+        { code: 'kh', name: this.$t('links.langKh') }
+      ],
+    }
   },
   methods: {
-    setCookie (locale) {
-      this.langSelected = locale.code;
-      console.log(this.langSelected)
-      this.$cookie.set('lang', locale)
-      this.$i18n.setLocaleCookie(locale)
-    },
     loadImage (imageSrc) {
       try {
         return require(`~/assets/img/${imageSrc}.svg`)
@@ -61,18 +63,18 @@ export default {
       }
 
       return this.loadImage('cambodia')
-    }
-  },
+    },
 
-  computed: {
-    availableLocales () {
-      return this.$i18n.locales
+    onChangeLang (locale) {
+      if (this.$i18n.locale === undefined)
+        this.$i18n.locale = 'en'
+
+      this.$i18n.locale = locale
     }
   },
-  watch: {
-    langSelected (val) {
-      this.$i18n.locale = val
-    }
+  created () {
+    if (this.$i18n.locale === undefined)
+      this.$i18n.locale = 'en'
   }
 }
 </script>

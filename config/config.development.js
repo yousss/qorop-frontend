@@ -13,6 +13,6 @@ module.exports = {
   port: 1333,
   qrlink: 'https://download.ocms365.com/app/demo/si/app.html',
   logrocket: 'mirrorgames/siwebtest-0omvn',
-  pgApi: 'https://pg.syiok99.net'
+  pgApi: 'https://pg.syiok99.net',
+  post: 'https://jsonplaceholder.typicode.com'
 }
- 

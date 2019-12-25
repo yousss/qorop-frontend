@@ -37,6 +37,7 @@ async function start () {
   app.use('/sitemap.xml', router.sitemap);
   app.use('/jwlogs', router.jwlogs);
   app.use('/labsapi', router.labsapi);
+  app.use('/placeHolder', router.post);
 
   REDIRECT301.forEach(route => {
     let routeFrom = route.from.replace('^/', '/');
