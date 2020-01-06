@@ -2,6 +2,7 @@ import Vuex from "vuex";
 import auth from "~/store/modules/module_auth";
 import sysConfig from "~/store/modules/module_config";
 import lang from '~/store/modules/module_lang';
+import jwtAuth from '~/store/modules/module_jwtAuth'
 
 
 const LOADER_ENABLE = 'LOADER_ENABLE';
@@ -113,7 +114,8 @@ const createStore = () => {
         modules: {
             auth,
             sysConfig,
-            lang
+            lang,
+            jwtAuth
         }
     });
 }

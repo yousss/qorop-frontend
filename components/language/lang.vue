@@ -9,15 +9,16 @@
           icon
         >
          <v-avatar height="32px">
-          <img :src="loadImage($i18n.locale === 'en' ? 'English' : 'Khmer')" alt="image loading language" />
+          <img :src="loadImage($i18n.locale === 'en' ? 'English': 'Khmer')" alt="image loading language" />
          </v-avatar>
         </v-btn>
       </template>
       <v-list>
-         <v-list-item-group >
+         <!-- <v-list-item-group >
             <v-list-item
-              v-for="locale in locales" :key="locale.code"
-              @click="onChangeLang(locale.code)"
+              v-for="locale in $i18n.locales" :key="locale.code"
+              :class="$i18n.locale === locale.code ? 'active': 'not-active' "
+              @click="changeLocale(locale.code)"
             >
               <v-list-item-icon>
                 <v-avatar height="32px">
@@ -26,11 +27,15 @@
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title v-text="locale.name">
-                  <!-- <nuxt-link to="" ></nuxt-link> -->
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-         </v-list-item-group>
+         </v-list-item-group> -->
+         <div v-for="locale in $i18n.locales" :key="locale.code" :class="$i18n.locale === locale.code ? 'active': 'not-active' ">
+            <a :href="switchLocalePath(locale.code)" @click="setCookie(locale.code)">
+              <img :src="loadImage(locale.code)" alt="Country Selector">
+            </a>
+          </div>
       </v-list>
     </v-menu>
   </div>
@@ -41,10 +46,6 @@ import { mapActions } from 'vuex'
 export default {
   data () {
     return {
-      locales: [
-        { code: 'en', name: this.$t('links.langEn') },
-        { code: 'kh', name: this.$t('links.langKh') }
-      ],
     }
   },
   methods: {
@@ -56,25 +57,12 @@ export default {
         return
       }
     },
+    setCookie (locale) {
+      console.log(this.$store, 'lang changed')
 
-    langFilter (localeCode) {
-      if (localeCode === 'en') {
-        return this.loadImage('united-kingdom')
-      }
-
-      return this.loadImage('cambodia')
-    },
-
-    onChangeLang (locale) {
-      if (this.$i18n.locale === undefined)
-        this.$i18n.locale = 'en'
-
-      this.$i18n.locale = locale
+      this.$cookie.set('lang', locale)
+      // this.$store.app.switchLocalePath(locale)
     }
-  },
-  created () {
-    if (this.$i18n.locale === undefined)
-      this.$i18n.locale = 'en'
   }
 }
 </script>

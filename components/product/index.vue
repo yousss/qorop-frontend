@@ -17,15 +17,15 @@
             background-color="pink lighten-3"
             color="pink"
           ></v-rating>
-            <v-card-title>{{$t('product.title')}}</v-card-title>
+            <v-card-title>{{$t('products.title')}}</v-card-title>
           </v-img>
 
-          <v-card-subtitle class="pb-0">{{$t('product.subtitle')}}</v-card-subtitle>
+          <v-card-subtitle class="pb-0">{{$t('products.subtitle')}}</v-card-subtitle>
 
           <v-card-text class="text--primary">
-            <div>{{$t('product.text1')}}</div>
+            <div>{{$t('products.text1')}}</div>
 
-            <div>{{$t('product.text2')}}</div>
+            <div>{{$t('products.text2')}}</div>
           </v-card-text>
         </v-card>
     </div>
@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       rating: 2
     }

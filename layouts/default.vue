@@ -11,7 +11,7 @@
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
-          :to="item.to"
+          :to="localePath({ name: item.to })"
           router
           exact
         >
@@ -90,12 +90,12 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'Welcome',
-          to: '/'
+          to: 'index'
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
+          title: 'About',
+          to: 'about'
         }
       ],
       miniVariant: false,

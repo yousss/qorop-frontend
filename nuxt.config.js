@@ -2,7 +2,7 @@ const colors = require('vuetify/es5/util/colors').default
 const path = require("path");
 const config = require(path.resolve("config"));
 const envConfig = require(path.resolve("config", "env_config.js"));
-// const I18N = require(path.resolve("config", "i18n", "index.js"));
+const I18N = require(path.resolve("config", "I18n.js"));
 
 module.exports = {
   mode: 'spa',
@@ -46,7 +46,7 @@ module.exports = {
   plugins: [
     // { src: '~plugins/vue-fb-customer-chat.js', ssr: false },
     { src: '~plugins/vue-core-image-upload.js', ssr: false },
-    { src: '~plugins/i18n', mode: 'client' },
+    '~plugins/set-locale-onload',
     { src: '~plugins/jw-core-components', ssr: false },
     { src: '~plugins/vendor/axios', ssr: true },
     { src: '~plugins/vendor/client-vendor', ssr: true },
@@ -65,6 +65,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    ['nuxt-i18n', I18N],
     ['cookie-universal-nuxt', { alias: 'cookie', parseJSON: false }],
     ['nuxt-mq', {
       breakpoints: {
@@ -91,7 +92,7 @@ module.exports = {
   // },
   env: envConfig,
   router: {
-    middleware: ["checklogin", "i18n"]
+    middleware: ["checklogin"]
   },
   /*
   ** vuetify module configuration
