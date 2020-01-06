@@ -23,6 +23,9 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700|Material+Icons' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Quicksand&display=swap' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Dancing+Script' }
+    ],
+    script: [
+      { src: "/inject/chatButton.js", type: "text/javascript", body: true }
     ]
   },
   /*

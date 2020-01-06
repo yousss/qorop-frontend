@@ -35,6 +35,7 @@ async function start () {
   });
 
   app.use('/sitemap.xml', router.sitemap);
+  app.use('/transaction', router.transaction);
   app.use('/jwlogs', router.jwlogs);
   app.use('/labsapi', router.labsapi);
   app.use('/placeHolder', router.post);
