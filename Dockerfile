@@ -17,4 +17,5 @@ ENV NODE_ENV=${DOCKER_ENV}
 RUN npm run build
 
 EXPOSE 1333
+
 CMD [ "npm", "start" ]
