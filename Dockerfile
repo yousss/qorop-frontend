@@ -10,6 +10,7 @@ COPY . /usr/src/app
 
 # Install app dependencies
 RUN apk add --no-cache --virtual .gyp python make g++ && npm install && apk del .gyp
+
 #RUN npm install
 ARG DOCKER_ENV
 ENV NODE_ENV=${DOCKER_ENV}
