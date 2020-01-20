@@ -1,8 +1,12 @@
 <template>
-  <button class="jwbtn" :class="{'disabled': disabled, 'fullwidth': fullWidth, 'round': round}" :disabled="loading || disabled">
+  <button
+    class="jwbtn"
+    :class="{ disabled: disabled, fullwidth: fullWidth, round: round }"
+    :disabled="loading || disabled"
+  >
     <loader v-if="loading" />
     <div v-else>
-      <v-icon v-if="icon">{{icon}}</v-icon>
+      <v-icon v-if="icon">{{ icon }}</v-icon>
       <slot></slot>
     </div>
   </button>
@@ -21,7 +25,7 @@ export default {
     fullWidth: Boolean,
     round: Boolean
   }
-}
+};
 </script>
 
 <style lang="stylus" scoped>
@@ -151,6 +155,23 @@ export default {
   i {
     color: $color-green;
   }
+}
+
+.jwbtn-pink {
+  background-color: $colorPink !important;
+  -webkit-box-shadow: 0 0 0 1px $colorPink inset;
+  box-shadow: 0 0 0 1px $colorPinkGrey inset;
+}
+
+.jwbtn-pink:hover:enabled {
+  background-color: transparent !important;
+    color: $colorPinkGrey;
+}
+
+.jwbtn-pink-border {
+  background-color: $colorPinkGrey !important;
+  -webkit-box-shadow: 0 0 0 1px $colorPinkGrey inset;
+  box-shadow: 0 0 0 1px $colorPinkGrey inset;
 }
 </style>
 

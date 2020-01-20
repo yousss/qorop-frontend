@@ -1,8 +1,5 @@
 <template>
     <div class="product-container">
-        <!-- <div class="product-wrapper " :elevation="5">
-            <img :src="loadImage(dataSrc.img)" alt="product image loading">
-        </div> -->
         <v-card
           class="mx-auto"
           max-width="700"
@@ -12,6 +9,7 @@
             height="100%"
             :src="loadImage(dataSrc.img)" alt="product image loading"
           >
+          <JwButton class="btn round jwbtn-pink" @click.native="onProductClicked(dataSrc.id)">View</JwButton>
           <v-rating
             v-model="rating"
             background-color="pink lighten-3"
@@ -52,7 +50,9 @@ export default {
         return
       }
     },
-
+    onProductClicked(id) {
+      this.$router.push(this.localePath({name: 'products-id', params: '${id}'}))
+    }
   },
 }
 </script>
@@ -61,6 +61,15 @@ export default {
 .product-container {
   .v-card__title {
     color: #de6c64;
+  }
+  button {
+    display: none;
+  }
+
+  &:hover {
+    button {
+      display: initial !important;
+    }
   }
 }
 </style>

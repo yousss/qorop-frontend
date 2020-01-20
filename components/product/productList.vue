@@ -3,7 +3,10 @@
         <v-container>
           <v-row no-gutters>
           <v-layout row justify-center>
-              <product v-for="product in products" :key="product.id" :dataSrc="product" class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12" />
+              <product v-for="product in products" 
+                :key="product.id" 
+                :dataSrc="product"
+                class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12" />
           </v-layout>
           </v-row>
         </v-container>

@@ -1,5 +1,5 @@
 <template>
-  <v-app >
+  <v-app>
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -30,57 +30,56 @@
       app
       flat
       max-height="500"
-      color="#fff"
+      color="rgb(255, 153, 0)"
       elevation-on-scroll
     >
       <v-app-bar-nav-icon color="black" @click.stop="drawer = !drawer" />
-      <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon color="black">mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
+      <v-btn icon @click.stop="miniVariant = !miniVariant">
+        <v-icon color="black"
+          >mdi-{{ `chevron-${miniVariant ? "right" : "left"}` }}</v-icon
+        >
       </v-btn>
       <div class="image-wrapper">
-        <img src="~/assets/img/logo.png" />
+        <nuxt-link :to="localePath({ name: 'index' })">
+          <img src="~/assets/img/logo.png" />
+        </nuxt-link>
       </div>
       <v-spacer></v-spacer>
       <v-spacer></v-spacer>
-      <v-tabs
-          align-with-title
-          background-color="transparent"
-          optional
-        >
-          <v-tab>{{ $t('links.myCart')  }}</v-tab>
-          <v-tab>{{ $t('links.myFavorite')  }}</v-tab>
-          <v-tab>{{ $t('links.register')  }}</v-tab>
-          <v-tab>{{ $t('links.login')  }}</v-tab>
+      <div class="searchWrapper">
+        <v-text-field
+          class="inputSearch"
+          append-icon="mdi-search-web"
+        ></v-text-field>
+        <jw-button class="btn round jwbtn-pink">search</jw-button>
+      </div>
+      <v-tabs align-with-title background-color="transparent" optional>
+        <v-tab>{{ $t("links.myCart") }}</v-tab>
+        <v-tab>{{ $t("links.myFavorite") }}</v-tab>
+        <v-tab>{{ $t("links.register") }}</v-tab>
+        <v-tab>{{ $t("links.login") }}</v-tab>
       </v-tabs>
       <language />
     </v-app-bar>
     <v-content>
-      <carousel />
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer
-      :fixed="fixed"
-      app
-    >
-   
+    <v-footer :fixed="fixed" app>
       <span>&copy; 2019</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
-import carousel from '~/components/carousel/index.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
-import language from '~/components/language/lang.vue'
+import { mapActions, mapGetters } from "vuex";
+import carousel from "~/components/carousel/index.vue";
+import VuetifyLogo from "~/components/VuetifyLogo.vue";
+import language from "~/components/language/lang.vue";
 
 export default {
-  data () {
+  data() {
     return {
       users: [],
       clipped: false,
@@ -88,26 +87,26 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: 'index'
+          icon: "mdi-apps",
+          title: "Welcome",
+          to: "index"
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'About',
-          to: 'about'
+          icon: "mdi-chart-bubble",
+          title: "About",
+          to: "about"
         }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
-    }
+      title: "Vuetify.js"
+    };
   },
-  mounted () {
-    this.$fbCustomerChat
-    console.log(this.isAuthenticated)
-    this.getUsers()
+  mounted() {
+    this.$fbCustomerChat;
+    console.log(this.isAuthenticated);
+    this.getUsers();
   },
   components: {
     carousel,
@@ -115,21 +114,23 @@ export default {
     language
   },
   computed: {
-    ...mapGetters(['isAuthenticated'])
+    ...mapGetters(["isAuthenticated"])
   },
   methods: {
-    ...mapActions(['checkAxiosTest', 'checkLogin']),
-    getUsers () {
-      this.checkAxiosTest().then(res => {
-        this.users = res;
-      }).catch(err => {
-        console.log(err)
-      })
+    ...mapActions(["checkAxiosTest", "checkLogin"]),
+    getUsers() {
+      this.checkAxiosTest()
+        .then(res => {
+          this.users = res;
+        })
+        .catch(err => {
+          console.log(err);
+        });
 
-      this.checkLogin()
+      this.checkLogin();
     }
-  },
-}
+  }
+};
 </script>
 <style lang="stylus">
 @import '~assets/variables.styl';
@@ -147,12 +148,19 @@ export default {
 
 .v-toolbar__content .image-wrapper {
   height: 70%;
-  width: 150px;
+  width: 6%;
 
   img {
     width: 100%;
     height: 100%;
   }
+}
+
+.searchWrapper {
+  margin-left 10%
+  justify-content: flex-end
+  display inline-flex
+  width 69%;
 }
 
 .v-toolbar__content .v-btn__content {

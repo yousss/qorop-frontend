@@ -14,26 +14,21 @@
         </v-btn>
       </template>
       <v-list>
-         <!-- <v-list-item-group >
-            <v-list-item
-              v-for="locale in $i18n.locales" :key="locale.code"
-              :class="$i18n.locale === locale.code ? 'active': 'not-active' "
-              @click="changeLocale(locale.code)"
-            >
-              <v-list-item-icon>
-                <v-avatar height="32px">
-                  <img :src="loadImage(locale.name)" alt="language loading" />
-                </v-avatar>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title v-text="locale.name">
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-         </v-list-item-group> -->
          <div v-for="locale in $i18n.locales" :key="locale.code" :class="$i18n.locale === locale.code ? 'active': 'not-active' ">
             <a :href="switchLocalePath(locale.code)" @click="setCookie(locale.code)">
-              <img :src="loadImage(locale.code)" alt="Country Selector">
+              <v-list-item-group >
+                <v-list-item>
+                  <v-list-item-icon>
+                    <v-avatar height="32px">
+                      <img :src="loadImage(locale.code === 'en' ? 'English': 'Khmer')" alt="Country Selector">
+                    </v-avatar>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title v-text="locale.name">
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list-item-group>
             </a>
           </div>
       </v-list>
@@ -58,10 +53,7 @@ export default {
       }
     },
     setCookie (locale) {
-      console.log(this.$store, 'lang changed')
-
       this.$cookie.set('lang', locale)
-      // this.$store.app.switchLocalePath(locale)
     }
   }
 }
