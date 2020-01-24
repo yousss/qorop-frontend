@@ -6,6 +6,7 @@ const I18N = {
     { code: 'en', iso: 'en-US', name: 'English' },
     { code: 'kh', iso: 'kh-KH', name: 'Khmer' },
   ],
+
   seo: false,
   defaultLocale: 'kh',
   detectBrowserLanguage: false,
