@@ -5,8 +5,8 @@
   "author": "Yous Yoeun",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development PORT=5000 nodemon --max-old-space-size=3584 server.dev.js --watch server",
-    "prod": "cross-env NODE_ENV=production PORT=5000 nodemon --max-old-space-size=3584 server.dev.js --watch server",
+    "dev": "cross-env NODE_ENV=development PORT=1333 nodemon --max-old-space-size=3584 server.dev.js --watch server",
+    "prod": "cross-env NODE_ENV=production PORT=1333 nodemon --max-old-space-size=3584 server.dev.js --watch server",
     "build": "nuxt build",
     "start": "cross-env mode=deploy node --max-old-space-size=2048 server.deploy.js",
     "generate": "nuxt generate",
