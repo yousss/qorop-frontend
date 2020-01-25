@@ -30,7 +30,7 @@
       app
       flat
       max-height="500"
-      color="rgb(255, 153, 0)"
+      color="red"
       elevation-on-scroll
     >
       <v-app-bar-nav-icon color="black" @click.stop="drawer = !drawer" />
