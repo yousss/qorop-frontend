@@ -34,24 +34,26 @@
       elevation-on-scroll
     >
       <v-app-bar-nav-icon color="black" @click.stop="drawer = !drawer" />
+
       <v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon color="black"
           >mdi-{{ `chevron-${miniVariant ? "right" : "left"}` }}</v-icon
         >
       </v-btn>
-      <div class="image-wrapper">
-        <nuxt-link :to="localePath({ name: 'index' })">
-          <img src="~/assets/img/logo.png" />
-        </nuxt-link>
-      </div>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <div class="searchWrapper">
-        <v-text-field
-          class="inputSearch"
-          append-icon="mdi-search-web"
-        ></v-text-field>
-        <jw-button class="btn round jwbtn-pink">search</jw-button>
+      <div class="leftToolbar">
+        <div class="image-wrapper">
+          <nuxt-link :to="localePath({ name: 'index' })">
+            <img src="~/assets/img/logo.png" />
+          </nuxt-link>
+        </div>
+        <div class="version">Version {{ getVersion }}</div>
+        <div class="searchWrapper">
+          <v-text-field
+            class="inputSearch"
+            append-icon="mdi-search-web"
+          ></v-text-field>
+          <jw-button class="btn round jwbtn-pink">search</jw-button>
+        </div>
       </div>
       <v-tabs align-with-title background-color="transparent" optional>
         <v-tab>{{ $t("links.myCart") }}</v-tab>
@@ -113,7 +115,11 @@ export default {
     language
   },
   computed: {
-    // ...mapGetters(["isAuthenticated"])
+    ...mapGetters(["version"]),
+    getVersion() {
+      if (process.env.NODE_ENV === "development") return this.version + " dev";
+      return this.version;
+    }
   },
   methods: {
     ...mapActions(["showLoginModal"]),
@@ -136,6 +142,13 @@ export default {
     justify-content: flex-end;
   }
 }
+.leftToolbar {
+  max-width 100%
+  align-items: center
+  display flex
+  justify-content center
+  width 100%
+}
 
 .v-toolbar__content .image-wrapper {
   height: 70%;
@@ -146,12 +159,16 @@ export default {
     height: 100%;
   }
 }
-
+.version {
+  margin-left: 10px;
+  color : $color-text-grey;
+  width 40%
+  justify-content center
+}
 .searchWrapper {
-  margin-left 10%
   justify-content: flex-end
   display inline-flex
-  width 69%;
+  width 60%;
 }
 
 .v-toolbar__content .v-btn__content {

@@ -1,6 +1,6 @@
 import Vuex from "vuex";
 import auth from "~/store/modules/module_auth";
-import lang from "~/store/modules/module_lang";
+import version from "~/store/modules/module_version";
 
 const LOADER_ENABLE = "LOADER_ENABLE";
 const LOADER_DISABLE = "LOADER_DISABLE";
@@ -30,7 +30,8 @@ const createStore = () => {
       }
     },
     modules: {
-      auth
+      auth,
+      version
     }
   });
 };

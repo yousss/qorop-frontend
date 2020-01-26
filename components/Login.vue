@@ -67,6 +67,7 @@ import { bus } from "@/store/services/bus";
 export default {
   data() {
     return {
+      loginPending: false,
       form: {
         username: "",
         password: "",
@@ -124,7 +125,9 @@ export default {
           pwd: this.form.password,
           deviceType: 0
         })
-          .then(res => {})
+          .then(res => {
+            this.loginPending = true;
+          })
           .catch(err => {});
       }
     },
@@ -140,7 +143,7 @@ export default {
 @import '~assets/variables.styl';
 
 .loginModal-wrapper{
-  background-color: $color-white;
+  background-color: $color-white-light;
   padding: 20px 60px;
   border-radius: 10px;
   position: relative;
