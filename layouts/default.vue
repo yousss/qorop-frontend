@@ -57,7 +57,7 @@
         <v-tab>{{ $t("links.myCart") }}</v-tab>
         <v-tab>{{ $t("links.myFavorite") }}</v-tab>
         <v-tab>{{ $t("links.register") }}</v-tab>
-        <v-tab>{{ $t("links.login") }}</v-tab>
+        <v-tab @click="openLoginModal()">{{ $t("links.login") }}</v-tab>
       </v-tabs>
       <language />
     </v-app-bar>
@@ -68,13 +68,14 @@
     </v-content>
     <v-footer :fixed="fixed" app>
       <span>&copy; 2019</span>
+      <Login />
     </v-footer>
   </v-app>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import carousel from "~/components/carousel/index.vue";
+import Login from "~/components/Login.vue";
 import VuetifyLogo from "~/components/VuetifyLogo.vue";
 import language from "~/components/language/lang.vue";
 
@@ -87,8 +88,8 @@ export default {
       fixed: false,
       items: [
         {
-          icon: "mdi-apps",
-          title: "Welcome",
+          icon: "mdi-home",
+          title: "Home",
           to: "index"
         },
         {
@@ -105,29 +106,19 @@ export default {
   },
   mounted() {
     this.$fbCustomerChat;
-    console.log(this.isAuthenticated);
-    this.getUsers();
   },
   components: {
-    carousel,
+    Login,
     VuetifyLogo,
     language
   },
   computed: {
-    ...mapGetters(["isAuthenticated"])
+    // ...mapGetters(["isAuthenticated"])
   },
   methods: {
-    ...mapActions(["checkAxiosTest", "checkLogin"]),
-    getUsers() {
-      this.checkAxiosTest()
-        .then(res => {
-          this.users = res;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-
-      this.checkLogin();
+    ...mapActions(["showLoginModal"]),
+    openLoginModal() {
+      this.showLoginModal();
     }
   }
 };

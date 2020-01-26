@@ -1,29 +1,29 @@
-const AUTHORIZE = 'AUTHORIZE'
-const UNAUTHORIZE = 'UNAUTHORIZE'
-const UNAUTHORIZED = 'UNAUTHORIZED'
-const LOGIN = 'LOGIN'
-const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-const LOGOUT = 'LOGOUT'
-const GET_USER_DETAILS = 'GET_USER_DETAILS'
-const CLEAR_USER_DATA = 'CLEAR_USER_DATA'
-const SUBSCRIBE_TO_NEWSLETTER = 'SUBSCRIBE_TO_NEWSLETTER'
-const ERROR_SUBSCRIPTION = 'ERROR_SUBSCRIPTION'
-const ACCOUNT_FROZEN = 'ACCOUNT_FROZEN'
+const AUTHORIZE = "AUTHORIZE";
+const UNAUTHORIZE = "UNAUTHORIZE";
+const UNAUTHORIZED = "UNAUTHORIZED";
+const LOGIN = "LOGIN";
+const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+const LOGOUT = "LOGOUT";
+const GET_USER_DETAILS = "GET_USER_DETAILS";
+const CLEAR_USER_DATA = "CLEAR_USER_DATA";
+const SUBSCRIBE_TO_NEWSLETTER = "SUBSCRIBE_TO_NEWSLETTER";
+const ERROR_SUBSCRIPTION = "ERROR_SUBSCRIPTION";
+const ACCOUNT_FROZEN = "ACCOUNT_FROZEN";
 
-function initialState () {
+function initialState() {
   return {
-    isAuthenticated: 'false',
+    isAuthenticated: false,
     pending: false,
     frozenStatus: false,
     username: "",
     memberID: "",
     user: {
       headers: {
-        access_token: '',
-        token_type: '',
-        client: '',
-        expiry: '',
-        uid: ''
+        access_token: "",
+        token_type: "",
+        client: "",
+        expiry: "",
+        uid: ""
       },
       fullname: "",
       email: "",
@@ -59,33 +59,33 @@ const getters = {
 };
 
 const mutations = {
-  [LOGIN] (state) {
+  [LOGIN](state) {
     state.loginPending = true;
   },
-  [LOGIN_SUCCESS] (state) {
+  [LOGIN_SUCCESS](state) {
     state.isAuthenticated = true;
     state.error_unauth = false;
     state.loginPending = false;
   },
-  [AUTHORIZE] (state, payload) {
+  [AUTHORIZE](state, payload) {
     state.pending = false;
     state.isAuthenticated = true;
     state.username = payload.username.value;
     state.memberID = payload.memberId.value;
     state.lastLoginTime = payload.lastLoginTime.value;
   },
-  [UNAUTHORIZED] (state) {
+  [UNAUTHORIZED](state) {
     state.pending = false;
     state.error_unauth = true;
   },
-  [UNAUTHORIZE] (state) {
+  [UNAUTHORIZE](state) {
     state.pending = false;
     state.isAuthenticated = false;
   },
-  [LOGOUT] (state) {
+  [LOGOUT](state) {
     state.isAuthenticated = false;
   },
-  [GET_USER_DETAILS] (state, payload) {
+  [GET_USER_DETAILS](state, payload) {
     state.user.dob = payload.birthday.value;
     state.user.fullname = payload.realName.value;
     state.user.email = payload.email.value;
@@ -96,281 +96,229 @@ const mutations = {
     state.user.line = payload.line.value;
     state.user.address = payload.address.value;
   },
-  [CLEAR_USER_DATA] (state) {
+  [CLEAR_USER_DATA](state) {
     const s = initialState();
     Object.keys(s).forEach(key => {
       state[key] = s[key];
     });
   },
-  [SUBSCRIBE_TO_NEWSLETTER] (state, payload) {
+  [SUBSCRIBE_TO_NEWSLETTER](state, payload) {
     state.subscriptionStatus = payload;
   },
-  [ERROR_SUBSCRIPTION] (state) {
-    state.subscriptionStatus = 'error'
+  [ERROR_SUBSCRIPTION](state) {
+    state.subscriptionStatus = "error";
   },
-  [ACCOUNT_FROZEN] (state) {
-    state.frozenStatus = true
+  [ACCOUNT_FROZEN](state) {
+    state.frozenStatus = true;
   }
 };
 
 const actions = {
-  async checkAxiosTest () {
+  async checkAxiosTest() {
     try {
-      return await this.$axios.$get(process.env.POST + '/posts')
-
+      return await this.$axios.$get(process.env.POST + "/posts");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   },
-  async login ({
-    commit,
-    dispatch,
-    state
-  }, creds) {
+  async login({ commit, dispatch, state }, creds) {
     try {
-      commit(LOGIN)
-      let {
-        data: {
-          user
-        }
-      } = await this.$axios.$post('/service/auth/login', creds);
-      await Promise.all([
-        dispatch('checkLogin'),
-        dispatch('getFavoriteGames'),
-        dispatch('getPromotions'),
-        dispatch('getScores', user.memberId),
-        dispatch('getMail', {
-          mailType: 2,
-          startIndex: 0
-        }),
-        dispatch('getAllMail')
-      ]);
-      dispatch('addFingerPrint', user.memberId)
-      return user
+      // commit(LOGIN);
+      // let {
+      //   data: { user }
+      // } = await this.$axios.$post("/service/auth/login", creds);
+      // await Promise.all([dispatch("checkLogin")]);
+      // return user;
     } catch (error) {
       state.loginPending = false;
       if (error.response) {
         let err = error.response.data;
-        if (err.code === "member.username.noExist" || err.code === "member.password.error" || err.message === "Cannot read property 'Id' of undefined") {
-          throw 'api.auth.login.invalid';
+        if (
+          err.code === "member.username.noExist" ||
+          err.code === "member.password.error" ||
+          err.message === "Cannot read property 'Id' of undefined"
+        ) {
+          throw "api.auth.login.invalid";
         } else if (err.code === "common.disabledAccount") {
-          throw 'api.auth.login.disabled';
-        }
-        // else if (err.code === "Memeber.Username.Required") {
-        //   throw 'api.auth.login.username';
-        // }
-        else {
-          throw 'Unknown error on Login! Error status: ' + err.status + ' Error Code: ' + err.code;
+          throw "api.auth.login.disabled";
+        } else {
+          throw "Unknown error on Login! Error status: " +
+            err.status +
+            " Error Code: " +
+            err.code;
         }
       } else {
-        throw 'api.error'
+        throw "api.error";
       }
     }
   },
-  async logout ({
-    commit,
-    dispatch
-  }) {
+  async logout({ commit, dispatch }) {
     try {
-      await this.$axios.$post('/service/auth/logout');
-      this.$gtmEvent.gtmAddDataLayer({
-        'ga_c_id': 'unknown'
-      });
-      dispatch('clearDataOnUnauthorized')
+      // await this.$axios.$post("/service/auth/logout");
+      // this.$gtmEvent.gtmAddDataLayer({
+      //   ga_c_id: "unknown"
+      // });
+      // dispatch("clearDataOnUnauthorized");
     } catch (err) {
-      console.error('logout error', err);
+      console.error("logout error", err);
     }
-
   },
-  async clearDataOnUnauthorized ({
-    commit,
-    dispatch
-  }) {
+  async clearDataOnUnauthorized({ commit, dispatch }) {
     try {
-      await Promise.all([
-        // dispatch("clearMoneyStore"),
-        // dispatch("clearFavoriteGames"),
-        // dispatch("clearUserData"),
-        // dispatch("clearTournamentData")
-      ]);
+      await Promise.all([]);
       commit(LOGOUT);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   },
-  async checkLogin ({
-    state,
-    commit
-  }) {
+  async checkLogin({ state, commit }) {
     try {
-      let {
-        data
-      } = await this.$axios.$post('/service/member/getOne');
-      this.$gtmEvent.gtmAddDataLayer({
-        'ga_c_id': data.memberId.value
-      });
-      this.$logRocket.identify({
-        name: data.realName.value,
-        email: data.email.value,
-        memberId: data.memberId.value
-      })
+      // let { data } = await this.$axios.$post("/service/member/getOne");
+      // this.$gtmEvent.gtmAddDataLayer({
+      //   ga_c_id: data.memberId.value
+      // });
+      // this.$logRocket.identify({
+      //   name: data.realName.value,
+      //   email: data.email.value,
+      //   memberId: data.memberId.value
+      // });
 
-      commit(AUTHORIZE, data)
-      commit(GET_USER_DETAILS, data)
+      // commit(AUTHORIZE, data);
+      // commit(GET_USER_DETAILS, data);
       if (data.status.value === 2) {
-        commit(ACCOUNT_FROZEN)
+        commit(ACCOUNT_FROZEN);
       }
       return data;
     } catch (err) {
       if (err.response) {
-        if (err.response.status === 401 && err.response.data.code === 'common.unauthorized') {
-          commit('UNAUTHORIZE');
+        if (
+          err.response.status === 401 &&
+          err.response.data.code === "common.unauthorized"
+        ) {
+          commit("UNAUTHORIZE");
           // if(this.$route.name && this.$route.name.split('___')[0]==='account'){
           //   this.$router.push(this.localePath({name: 'index'}));
           // }
         }
       } else {
-        console.log("CheckLogin Server Error", err.message)
+        console.log("CheckLogin Server Error", err.message);
       }
     }
   },
-  checkUsername ({
-    commit
-  }, username) {
-    return this.$axios.$post('/service/member/checkUsername', {
+  checkUsername({ commit }, username) {
+    return this.$axios.$post("/service/member/checkUsername", {
       username
-    })
+    });
   },
-  async checkPhoneNumber ({
-    commit
-  }, phoneNumber) {
+  async checkPhoneNumber({ commit }, phoneNumber) {
     try {
-      return await this.$axios.$post('/service/member/checkPhoneNumber', {
+      return await this.$axios.$post("/service/member/checkPhoneNumber", {
         phoneNumber
-      })
+      });
     } catch (err) {
       switch (err.response.data.code) {
-        case 'member.phone.exist':
-          throw 'Member.Phone.Exist'
+        case "member.phone.exist":
+          throw "Member.Phone.Exist";
           break;
         default:
-          throw 'api.unCaught';
+          throw "api.unCaught";
           break;
       }
     }
   },
-  async getCaptcha ({
-    commit
-  }) {
+  async getCaptcha({ commit }) {
     let {
       data: {
-        captcha: {
-          data
-        }
+        captcha: { data }
       }
-    } = await this.$axios.$post('/service/auth/captcha')
+    } = await this.$axios.$post("/service/auth/captcha");
     let imgString = data.reduce((prev, curr) => {
-      return prev + String.fromCharCode(curr)
+      return prev + String.fromCharCode(curr);
     }, "");
     let res = `data:image/jpeg;base64,${btoa(imgString)}`;
     return res;
   },
-  async signUpNewUser ({
-    dispatch
-  }, userData) {
+  async signUpNewUser({ dispatch }, userData) {
     try {
-      return await this.$axios.$post('/service/member', userData)
+      return await this.$axios.$post("/service/member", userData);
     } catch (err) {
       switch (err.response.data.code) {
-        case 'common.captcha.wrong':
-          throw 'Captcha.Wrong';
+        case "common.captcha.wrong":
+          throw "Captcha.Wrong";
           break;
-        case 'common.captcha.expired':
-          throw 'Captcha.Expired';
+        case "common.captcha.expired":
+          throw "Captcha.Expired";
           break;
-        case 'member.referee.noExist':
-          throw 'Member.Referee.NoExist'
+        case "member.referee.noExist":
+          throw "Member.Referee.NoExist";
           break;
-        case 'common.parameter.illegal':
+        case "common.parameter.illegal":
           switch (err.response.data.data.field) {
-            case 'email':
-              throw 'Member.Email.Invalid';
+            case "email":
+              throw "Member.Email.Invalid";
               break;
             default:
               break;
           }
-        case 'common.parameter.duplicated':
+        case "common.parameter.duplicated":
           switch (err.response.data.data.field) {
-            case 'email':
-              throw 'Member.Email.Exist';
+            case "email":
+              throw "Member.Email.Exist";
               break;
-            case 'identityNumber':
-              throw 'Member.identityNumber.Exist';
+            case "identityNumber":
+              throw "Member.identityNumber.Exist";
               break;
             default:
               break;
           }
-        case 'common.parameter.verification.failed':
-          throw 'Member.identityNumber.Wrong'
+        case "common.parameter.verification.failed":
+          throw "Member.identityNumber.Wrong";
         default:
-          dispatch('errorLogs', { code: 'EVT-SignUp', error: err.response });
+          dispatch("errorLogs", { code: "EVT-SignUp", error: err.response });
           let logData = {
-            category: 'SignUp',
-            code: 'EVT-SignUp',
+            category: "SignUp",
+            code: "EVT-SignUp",
             log_detail: {
               errMsg: err.response.data
             },
-            flag: 'error'
-          }
-          dispatch('setLogs', logData)
-          throw 'api.unCaught';
+            flag: "error"
+          };
+          dispatch("setLogs", logData);
+          throw "api.unCaught";
           break;
       }
-
     }
   },
-  submitforgotPassword ({
-    commit
-  }, params) {
-    return this.$axios.$post('/service/member/password/reset', params)
+  submitforgotPassword({ commit }, params) {
+    // return this.$axios.$post("/service/member/password/reset", params);
   },
-  changePassword ({
-    commit
-  }, params) {
-    return this.$axios.$put('/service/member/password', params)
+  changePassword({ commit }, params) {
+    // return this.$axios.$put("/service/member/password", params);
   },
-  async updateUser ({
-    commit,
-    state
-  }, userDetails) {
+  async updateUser({ commit, state }, userDetails) {
     try {
-      let {
-        data
-      } = await this.$axios.$put('/service/member', userDetails)
-      commit(GET_USER_DETAILS, data)
+      let { data } = await this.$axios.$put("/service/member", userDetails);
+      commit(GET_USER_DETAILS, data);
     } catch (err) {
-      console.error('update user error', err)
+      console.error("update user error", err);
       throw err;
     }
   },
-  clearUserData ({
-    commit
-  }) {
+  clearUserData({ commit }) {
     commit(CLEAR_USER_DATA);
   },
-  error401 ({
-    commit
-  }) {
+  error401({ commit }) {
     commit(UNAUTHORIZED);
   },
-  async checkNewsLetterSubscription ({
-    commit
-  }, memberId) {
+  async checkNewsLetterSubscription({ commit }, memberId) {
     try {
       const userId = {
         memberId: memberId
       };
-      let status = await this.$axios.$post(process.env.CMSAPI + "/api/vendor/newsletter/checkstatus", userId);
+      let status = await this.$axios.$post(
+        process.env.CMSAPI + "/api/vendor/newsletter/checkstatus",
+        userId
+      );
       if (status.data) {
         commit(SUBSCRIBE_TO_NEWSLETTER, status.data.status);
       } else {
@@ -380,17 +328,16 @@ const actions = {
       commit(ERROR_SUBSCRIPTION);
     }
   },
-  async newsletterSubscription ({
-    commit,
-    dispatch,
-    state
-  }, subscriptionData) {
+  async newsletterSubscription({ commit, dispatch, state }, subscriptionData) {
     try {
       var data = {
         category: "Newsletter",
         code: "EVT-Newsletter"
       };
-      await this.$axios.$post(process.env.CMSAPI + "/api/vendor/newsletter/subscribe", subscriptionData.data);
+      await this.$axios.$post(
+        process.env.CMSAPI + "/api/vendor/newsletter/subscribe",
+        subscriptionData.data
+      );
 
       dispatch("setLogs", {
         ...data,
@@ -442,12 +389,12 @@ const actions = {
       throw er;
     }
   },
-  async changeNewsletterStatus ({
-    commit,
-    dispatch
-  }, subscriptionData) {
+  async changeNewsletterStatus({ commit, dispatch }, subscriptionData) {
     try {
-      await this.$axios.$post(process.env.CMSAPI + "/api/vendor/newsletter/status", subscriptionData);
+      await this.$axios.$post(
+        process.env.CMSAPI + "/api/vendor/newsletter/status",
+        subscriptionData
+      );
     } catch (e) {
       let error = "";
       if (e.response.data.message === "user.no.exist") {

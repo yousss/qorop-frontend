@@ -18,10 +18,10 @@
 
 <script>
 import productList from "./products/product.vue";
-import Logo from "~/components/Logo.vue";
 import VueCoreImageUpload from "vue-core-image-upload";
 
 export default {
+  name: "index",
   head: {
     title: "Home page 🚀",
     meta: [
@@ -56,7 +56,6 @@ export default {
     }
   },
   components: {
-    Logo,
     VueCoreImageUpload,
     productList
   }
