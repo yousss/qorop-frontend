@@ -1,31 +1,30 @@
 <template>
-    <div class="container">
-        <h1>About Us</h1>
-        <p>{{ $t('about.content') }}</p>
-        <hr>
-        <TwitterHeadCard />
-    </div>
+  <div class="container">
+    <h1>About Us</h1>
+    <p>{{ $t("about.content") }}</p>
+    <hr />
+  </div>
 </template>
 
 <script>
-import TwitterHeadCard from '~/components/twitter-head-card.vue'
-
 export default {
-  data () {
+  data() {
     return {
       title: this.title
-    }
+    };
   },
   head: {
-    title: 'About Page',
+    title: "About Page",
     meta: [
-      { hid: 'description', name: 'description', content: 'About page description' }
+      {
+        hid: "description",
+        name: "description",
+        content: "About page description"
+      }
     ]
   },
-  components: {
-    TwitterHeadCard
-  }
-}
+  components: {}
+};
 </script>
 
 <style lang="stylus" scoped></style>

@@ -58,7 +58,7 @@
       <v-tabs align-with-title background-color="transparent" optional>
         <v-tab>{{ $t("links.myCart") }}</v-tab>
         <v-tab>{{ $t("links.myFavorite") }}</v-tab>
-        <v-tab>{{ $t("links.register") }}</v-tab>
+        <v-tab @click="openRegisterModal()">{{ $t("links.register") }}</v-tab>
         <v-tab @click="openLoginModal()">{{ $t("links.login") }}</v-tab>
       </v-tabs>
       <language />
@@ -71,6 +71,7 @@
     <v-footer :fixed="fixed" app>
       <span>&copy; 2019</span>
       <Login />
+      <Register :registerModal.sync="registerModal" />
     </v-footer>
   </v-app>
 </template>
@@ -78,13 +79,15 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import Login from "~/components/Login.vue";
-import VuetifyLogo from "~/components/VuetifyLogo.vue";
+import Register from "~/components/Register.vue";
 import language from "~/components/language/lang.vue";
+import { bus } from "@/store/services/bus";
 
 export default {
   data() {
     return {
       users: [],
+      registerModal: false,
       clipped: false,
       drawer: false,
       fixed: false,
@@ -111,8 +114,8 @@ export default {
   },
   components: {
     Login,
-    VuetifyLogo,
-    language
+    language,
+    Register
   },
   computed: {
     ...mapGetters(["version"]),
@@ -125,6 +128,10 @@ export default {
     ...mapActions(["showLoginModal"]),
     openLoginModal() {
       this.showLoginModal();
+    },
+    openRegisterModal() {
+      this.registerModal = true;
+      // bus.$emit("openRegiserModal", registerModal);
     }
   }
 };
